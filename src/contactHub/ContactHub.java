@@ -74,41 +74,49 @@ public class ContactHub {
         System.out.println("               ADD CONTACT INTO THE LIST        ");
         L1:
         do {
-//            String id = generateID();
-//            System.out.println("============================");
-//            System.out.println("Contact ID : " + id);
-//            System.out.println("============================");
-//            System.out.print("Enter name -> ");
-//            String name = input.next();
+            String id = generateID();
+            System.out.println("============================");
+            System.out.println("Contact ID : " + id);
+            System.out.println("============================");
+            System.out.print("Enter name -> ");
+            String name = input.next();
 
-//            L2:
-//            do {
-//                System.out.print("Enter Mobile Number -> ");
-//                phoneNumber = input.next();
-//                if (!isValidPhoneNumber(phoneNumber)) {
-//                    System.out.println("Phone number is invalid!!");
-//                    System.out.print("Do you want to add again? (y/n)");
-//                    char replyNumber = input.next().charAt(0);
-//                    if (replyNumber == 'Y' || replyNumber == 'y') {
-////                        System.out.print("\033[3A");
-////                        // Clear the lines 
-////                        System.out.print("\033[0J");
-//                        continue L2;
-//                    } else if (replyNumber == 'N' || replyNumber == 'n') {
-//                        menu();
-//                        break;
-//                    } else {
-//                        menu();
-//                        break;
-//                    }
-//                }
-//            } while (!isValidPhoneNumber(phoneNumber));
+            L2:
+            do {
+                System.out.print("Enter Mobile Number -> ");
+                phoneNumber = input.next();
+                if (!isValidPhoneNumber(phoneNumber)) {
+                    System.out.println("Phone number is invalid!!");
+                    System.out.print("Do you want to add again? (y/n)");
+                    char replyNumber = input.next().charAt(0);
+                    if (replyNumber == 'Y' || replyNumber == 'y') {
+                        continue L2;
+                    } else if (replyNumber == 'N' || replyNumber == 'n') {
+                        menu();
+                        break;
+                    } else {
+                        menu();
+                        break;
+                    }
+                }
+            } while (!isValidPhoneNumber(phoneNumber));
 
-//            System.out.print("Enter your company name -> ");
-//            String company = input.next();
-//
-//            System.out.print("Enter your salary -> ");
-//            salary = input.nextDouble();
+            System.out.print("Enter your company name -> ");
+            String company = input.next();
+
+            L4:
+            do{
+                try{
+                    System.out.print("Enter your salary -> ");
+                    salary = input.nextDouble();
+                }catch(Exception ex){
+                    System.out.println("Salary format is incorrect!!");
+                    salary=0.0;
+                    input.nextLine();
+                    continue L4;
+                }
+            }while(salary ==0.0);
+            
             L3:
             do {
                 System.out.print("Enter your Birthday (YYYY-MM-DD) -> ");
@@ -131,18 +139,18 @@ public class ContactHub {
             } while (!isValidBirthday(birthday));
 
             extendsArray();
-//            Contact c1 = new Contact(id, name, phoneNumber, company, salary, birthday);
-//            contactsArray[contactsArray.length - 1] = c1;
-//            System.out.println(name + " added to the system successfully");
-//            System.out.print("Do you want to add another contact? (y/n)");
-//            char reply = input.next().charAt(0);
-//            if (reply == 'Y' || reply == 'y') {
-//                continue L1;
-//            } else if (reply == 'N' || reply == 'n') {
-//                menu();
-//            } else {
-//                menu();
-//            }
+            Contact c1 = new Contact(id, name, phoneNumber, company, salary, birthday);
+            contactsArray[contactsArray.length - 1] = c1;
+            System.out.println(name + " added to the system successfully");
+            System.out.print("Do you want to add another contact? (y/n)");
+            char reply = input.next().charAt(0);
+            if (reply == 'Y' || reply == 'y') {
+                continue L1;
+            } else if (reply == 'N' || reply == 'n') {
+                menu();
+            } else {
+                menu();
+            }
         } while (true);
     }
 
@@ -169,11 +177,7 @@ public class ContactHub {
             System.out.println("Birthday is Invalid!!!");
             return false;
         }
-        System.out.println(yearNew);
-        System.out.println(monthNew);
-        System.out.println(dayNew);
         if ((monthNew > 12) || (monthNew < 1) || (dayNew < 1)) {
-            System.out.println("Birthday is Invalid!!!");
             return false;
         }
 
@@ -226,9 +230,6 @@ public class ContactHub {
         return false;
     }
 
-//    public static boolean isValidBirthday(String birthday){
-//        
-//    }
     public static String generateID() {
         String id = null;
         if (contactsArray.length == 0) {
